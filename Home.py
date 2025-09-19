@@ -1,4 +1,3 @@
-# itinerary_app.py
 import os
 import io
 import re
@@ -11,16 +10,10 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.pdfbase import pdfmetrics
 
-# ----------------------
-# Setup
-# ----------------------
 load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-2.0-flash-exp")
 
-# ----------------------
-# Fonts & Multilingual PDF Setup
-# ----------------------
 FONT_DIR = "fonts"
 
 def register_fonts():
@@ -47,9 +40,6 @@ LANG_FONT_MAP = {
 
 register_fonts()
 
-# ----------------------
-# PDF Generation
-# ----------------------
 def generate_pdf(itinerary_text, language="English", filename="itinerary.pdf"):
     buffer = io.BytesIO()
     doc = SimpleDocTemplate(buffer, pagesize=A4, rightMargin=18, leftMargin=18, topMargin=18, bottomMargin=18)
@@ -73,9 +63,6 @@ def generate_pdf(itinerary_text, language="English", filename="itinerary.pdf"):
     buffer.seek(0)
     return buffer
 
-# ----------------------
-# Helper Functions
-# ----------------------
 def clean_response_text(text: str) -> str:
     text = re.sub(r'```[\s\S]*?```', '', text)
     text = re.sub(r'[*_`]', '', text)
@@ -126,9 +113,6 @@ def generate_itinerary(departure, destination, days, budget, interests, language
     response = model.generate_content(prompt)
     return clean_response_text(response.text)
 
-# ----------------------
-# Streamlit UI
-# ----------------------
 st.set_page_config(page_title="Itinerary Generator", layout="wide")
 st.title("✈️ Personalized Itinerary Generator")
 
@@ -139,13 +123,11 @@ budget = st.number_input("Budget (INR):", min_value=1000, max_value=1000000, val
 interests = st.text_area("Enter your interests (comma-separated):", "Food, Adventure, Culture")
 language = st.selectbox("Output Language:", list(LANG_FONT_MAP.keys()))
 
-# Session state to store itineraries
 if "itinerary" not in st.session_state:
     st.session_state.itinerary = None
 if "custom_itinerary" not in st.session_state:
     st.session_state.custom_itinerary = None
 
-# --- Generate Initial Itinerary ---
 if st.button("Generate Itinerary"):
     if not departure or not destination or not days or not budget or not interests or not language:
         st.warning("Please provide all primary details: departure location, destination, number of days, number of people, budget, interests, and language.")
@@ -160,7 +142,6 @@ if st.session_state.itinerary:
     pdf_buffer = generate_pdf(st.session_state.itinerary, language=language)
     st.download_button("Download Itinerary as PDF", data=pdf_buffer, file_name="itinerary.pdf", mime="application/pdf")
 
-    # --- User Suggestion ---
     st.subheader("Customize Your Itinerary")
     user_suggestion = st.text_area("Enter your suggestions/preferences to adjust the itinerary:", key="suggestion_input")
     if st.button("Regenerate Itinerary with Suggestions"):
@@ -170,9 +151,9 @@ if st.session_state.itinerary:
         else:
             st.warning("Please enter a suggestion to regenerate itinerary.")
 
-# --- Customized Itinerary ---
 if st.session_state.custom_itinerary:
     st.subheader("Customized Itinerary (with your suggestion)")
     st.text(st.session_state.custom_itinerary)
     pdf_buffer_custom = generate_pdf(st.session_state.custom_itinerary, language=language)
     st.download_button("Download Customized Itinerary as PDF", data=pdf_buffer_custom, file_name="custom_itinerary.pdf", mime="application/pdf")
+
