@@ -83,8 +83,8 @@ AnbuPayanAI/
 
 ![](./screenshots/AP11.PNG)
 ![](./screenshots/AP12.PNG)
-![](./screenshots/Ap13.PNG)
-![](./screenshots/Ap14.PNG)
+![](./screenshots/AP13.PNG)
+![](./screenshots/AP14.PNG)
 
 ### Budget Page
 
@@ -103,6 +103,12 @@ AnbuPayanAI/
 ## 🎥 Demo Video
 
 👉 [Watch the demo here]()
+
+---
+
+## 🏖️ App Usage
+
+👉 [Try the app here](https://anbupayanai-app.streamlit.app/)
 
 ---
 
