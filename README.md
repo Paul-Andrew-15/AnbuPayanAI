@@ -78,16 +78,24 @@ AnbuPayanAI/
 
 ## 📸 Screenshots
 
-### 💬 Chatbot Page
+### Itinerary Page
 
-![](./screenshots/FA1.PNG)
-![](./screenshots/FA2.PNG)
-![](./screenshots/FA3.PNG)
+![](./screenshots/AP11.PNG)
+![](./screenshots/AP12.PNG)
+![](./screenshots/Ap13.PNG)
+![](./screenshots/Ap14.PNG)
 
-### 📊 Quiz Page
+### Budget Page
 
-![](./screenshots/FB1.PNG)
-![](./screenshots/FB2.PNG)
+![](./screenshots/AP21.PNG)
+![](./screenshots/AP22.PNG)
+![](./screenshots/AP23.PNG)
+
+### Chatbot Page
+
+![](./screenshots/AP31.PNG)
+![](./screenshots/AP32.PNG)
+
 
 ---
 
@@ -104,9 +112,9 @@ AnbuPayanAI/
 
 ## 🎯 USP of AnbuPayanAI
 
-🌐 Inclusive Multilinguality – Supports India’s most spoken languages.
-🔄 Adaptive & Regenerative – Dynamic itineraries and budgets that adapt in real time.
-🛠️ All-in-One Companion – From itinerary planning to budget breakdowns and PDF exports.
+* 🌐 Inclusive Multilinguality – Supports India’s most spoken languages.
+* 🔄 Adaptive & Regenerative – Dynamic itineraries and budgets that adapt in real time.
+* 🛠️ All-in-One Companion – From itinerary planning to budget breakdowns and PDF exports.
 
 ---
 
