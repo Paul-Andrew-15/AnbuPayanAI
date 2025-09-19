@@ -3,30 +3,25 @@ import google.generativeai as genai
 import os
 from dotenv import load_dotenv
 
-# Load API key
 load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
-# Initialize model
 model = genai.GenerativeModel("gemini-2.0-flash-001")
 
 st.set_page_config(page_title="AnbuPayanAI")
 st.title("Multilingual Chatbot")
 
-# Language selection
 language = st.selectbox(
     "Select language",
     ['English','Hindi','Bengali','Telugu','Marathi','Tamil','Gujarati','Kannada','Malayalam']
 )
 
-# Initialize chat session and display list in session_state
 if 'chat_session' not in st.session_state:
     st.session_state['chat_session'] = model.start_chat(history=[])
 
 if 'chat_display' not in st.session_state:
-    st.session_state['chat_display'] = []  # stores tuples (sender, message)
+    st.session_state['chat_display'] = [] 
 
-# Function to get response from Gemini
 def gemini_response(language, user_input, chat_session):
     prompt = f"""
 You are a friendly multilingual chatbot that helps users with trip planning and bookings.
@@ -53,7 +48,6 @@ Rules:
     response = chat_session.send_message(f"{prompt}\nUser: {user_input}")
     return response.text
 
-# User input
 user_input = st.chat_input("Ask the question", key="input")
 
 if user_input:
@@ -61,9 +55,9 @@ if user_input:
     st.session_state['chat_display'].append(("You", user_input))
     st.session_state['chat_display'].append(("Bot", response))
 
-# Display chat history
 for sender, msg in st.session_state['chat_display']:
     if sender == "You":
         st.chat_message("user").write(msg)
     else:
         st.chat_message("assistant").write(msg)
+
