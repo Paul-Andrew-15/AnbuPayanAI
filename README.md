@@ -70,6 +70,7 @@ AnbuPayanAI/
 │── Budget.py             # Budget recommendation page
 │── Chatbot.py            # Chatbot page
 │── /fonts                # Fonts required for storing in pdfs
+│── /screenshots          # Screenshots of the output
 │── requirements.txt      # Dependencies  
 │── README.md             # Project documentation  
 ```
