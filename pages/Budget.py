@@ -12,17 +12,11 @@ import io
 import re
 import math
 
-# ----------------------
-# Setup
-# ----------------------
 load_dotenv()
 genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-2.0-flash-001")
 
-# ----------------------
-# Fonts & Multilingual Setup
-# ----------------------
-FONT_DIR = "fonts"  # folder containing all TTF files
+FONT_DIR = "fonts" 
 
 def register_fonts():
     pdfmetrics.registerFont(TTFont('NotoSans', os.path.join(FONT_DIR, 'NotoSans-Regular.ttf')))  # English
@@ -48,9 +42,6 @@ LANG_FONT_MAP = {
 
 register_fonts()
 
-# ----------------------
-# Budget Functions
-# ----------------------
 def get_budget(location, days, user_budget, people, suggestion=None, language="English"):
     base_prompt = f"""
     You are a travel budget planner. Plan a {days}-day trip for a traveler **departing from {departure}** to {location} for {people} people.
@@ -196,9 +187,6 @@ def generate_pdf(table_data, notes, language="English", highlight_row_idx=None, 
     buffer.seek(0)
     return buffer
 
-# ----------------------
-# Streamlit UI
-# ----------------------
 st.set_page_config(page_title="AnbuPayanAI")
 st.header("Budget Recommendation System")
 
@@ -215,7 +203,6 @@ if "base_budget" not in st.session_state:
 if "custom_budget" not in st.session_state:
     st.session_state.custom_budget = None
 
-# --- Base Budget ---
 if st.button("Get Budget Plan"):
     if not departure or not location or not days or not user_budget or not people:
         st.warning("Please provide all primary details: departure location, destination, number of days, number of people, and budget.")
@@ -242,7 +229,6 @@ if st.session_state.base_budget:
     pdf_buffer = generate_pdf(table_data, notes, language=language, highlight_row_idx=total_row_idx)
     st.download_button("Download Budget as PDF", data=pdf_buffer, file_name="travel_budget.pdf", mime="application/pdf")
 
-    # Suggestions
     st.subheader("Want to customize the budget further?")
     user_suggestion = st.text_area("Enter your suggestions:", key="suggestion")
 
@@ -261,7 +247,6 @@ if st.session_state.base_budget:
         else:
             st.warning("Please enter a suggestion before generating a new budget.")
 
-# --- Customized Budget ---
 if st.session_state.custom_budget:
     table_data_s,notes_s, total_row_idx_s = parse_budget_text(st.session_state.custom_budget)
 
@@ -272,3 +257,4 @@ if st.session_state.custom_budget:
 
     pdf_buffer_s = generate_pdf(table_data_s, notes_s, language=language, highlight_row_idx=total_row_idx_s)
     st.download_button("Download Customized Budget as PDF", data=pdf_buffer_s, file_name="travel_budget_customized.pdf", mime="application/pdf")
+
