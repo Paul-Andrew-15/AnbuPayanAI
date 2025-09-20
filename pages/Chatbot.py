@@ -9,7 +9,8 @@ genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 model = genai.GenerativeModel("gemini-2.0-flash-001")
 
 st.set_page_config(page_title="AnbuPayanAI")
-st.title("Multilingual Chatbot")
+st.title("🌍AnbuPayanAI")
+st.header("Multilingual Chatbot")
 
 language = st.selectbox(
     "Select language",
@@ -60,4 +61,5 @@ for sender, msg in st.session_state['chat_display']:
         st.chat_message("user").write(msg)
     else:
         st.chat_message("assistant").write(msg)
+
 
