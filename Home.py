@@ -114,7 +114,8 @@ def generate_itinerary(departure, destination, days, budget, interests, language
     return clean_response_text(response.text)
 
 st.set_page_config(page_title="Itinerary Generator", layout="wide")
-st.title("✈️ Personalized Itinerary Generator")
+st.title("🌍AnbuPayanAI")
+st.header("Personalized Itinerary Generator")
 
 departure = st.text_input("Enter Departure Location:", "Chennai")
 destination = st.text_input("Enter Destination:", "Bangalore")
@@ -156,4 +157,5 @@ if st.session_state.custom_itinerary:
     st.text(st.session_state.custom_itinerary)
     pdf_buffer_custom = generate_pdf(st.session_state.custom_itinerary, language=language)
     st.download_button("Download Customized Itinerary as PDF", data=pdf_buffer_custom, file_name="custom_itinerary.pdf", mime="application/pdf")
+
 
