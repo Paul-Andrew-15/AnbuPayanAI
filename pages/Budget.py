@@ -188,6 +188,7 @@ def generate_pdf(table_data, notes, language="English", highlight_row_idx=None, 
     return buffer
 
 st.set_page_config(page_title="AnbuPayanAI")
+st.title("🌍AnbuPayanAI")
 st.header("Budget Recommendation System")
 
 departure = st.text_input("Enter your departure location:", key="departure")
@@ -257,4 +258,5 @@ if st.session_state.custom_budget:
 
     pdf_buffer_s = generate_pdf(table_data_s, notes_s, language=language, highlight_row_idx=total_row_idx_s)
     st.download_button("Download Customized Budget as PDF", data=pdf_buffer_s, file_name="travel_budget_customized.pdf", mime="application/pdf")
+
 
